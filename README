@@ -1,0 +1,33 @@
+Reports
+
+1- Graphic report "Duration vs Plays":
+
+Get dimension2 (Duration) related with metric1 (PlaybackStarted)
+
+```
+query: {
+    metrics: 'ga:metric1',
+    dimensions: 'ga:dimension2',
+    'start-date': '30daysAgo',
+    'end-date': 'today'
+}
+```
+2- Pipe graphic report "Duraton vs Plays".
+
+3- Build table report.
+
+a- Get total plays from each video, using metric1 (PlaybackStarted) related with dimension3 (Title).
+
+b- Get average time elapsed from each vide, usig metric1 (PlaybackStarted) related with dimension3 (Title) and dimension 4 (Elapsed time).
+
+c- Get plays per each milestone, using metric1 (PlaybackStarted) related with eventAction (milestones) and dimension3 (Title)
+
+Milestones:
+
+```
+[0.01, 'playProgressStarted'],
+[0.25, 'playProgressQuarter'],
+[0.5, 'playProgressHalf'],
+[0.75, 'playProgressThreeQuarters'],
+[0.97, 'playProgressEnd']
+```
