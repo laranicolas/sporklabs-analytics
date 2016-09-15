@@ -1,0 +1,67 @@
+<html ng-app="gaTest">
+    <head>
+        <title>Google Analytics Test</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta charset="utf-8">
+
+        <style>
+            .input-error {
+                border: 2px dashed red;
+            }
+            .is-increasing, .increaser {
+                background-color: green;
+            }
+            .is-decreasing, .decreaser {
+                background-color: red;
+            }
+        </style>
+         <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="bower_components/ng-table/dist/ng-table.min.css">
+
+        <script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
+        <script type="text/javascript" src="bower_components/ngAnalytics/src/ng-analytics.min.js"></script>
+        <script type="text/javascript" src="bower_components/underscore/underscore-min.js"></script>
+        <script type="text/javascript" src="bower_components/ng-table/dist/ng-table.js"></script>
+        <script type="text/javascript" src="app/app.js"></script>
+    </head>
+    <body ng-controller="MainCtrl">
+        <div>
+            <ng-analytics-auth label="Hallo:&nbsp;" hide-on-auth="true" auth-container="embed-api-auth-container"></ng-analytics-auth>
+            <ng-analytics-view view-selector-container="view-selector-container" auth-container="embed-api-auth-container"></ng-analytics-view>
+            <ng-analytics-report queries="queries" auth-container="embed-api-auth-container"></ng-analytics-report>
+            <ng-analytics-report queries="queries" auth-container="embed-api-auth-container" view-selector-container="view-selector-container"></ng-analytics-report>
+            <!-- <ng-analytics-chart chart="extraChart" auth-container="embed-api-auth-container" view-selector-container="view-selector-container"></ng-analytics-chart> -->
+            <ng-analytics-active-users default-ids="defaultIds" auth-container="embed-api-auth-container"></ng-analytics-active-users>
+            <ng-analytics-active-users label="Current users:" increase-class="increaser" decrease-class="decreaser" active-users-container="active-users-container-1" view-selector-container="view-selector-container" auth-container="embed-api-auth-container"></ng-analytics-active-users>
+            <ng-analytics-chart ng-repeat="chart in charts" chart="chart" view-selector-container="view-selector-container" auth-container="embed-api-auth-container"></ng-analytics-chart>
+
+            <div ng-if="showReport">
+                <table ng-table="tableParams" class="table table-condensed table-bordered table-striped" show-filter="true">
+                    <tr ng-repeat="report in $data">
+                        <td title="'Title'" filter="{ title: 'text'}" sortable="'title'">
+                            {{report.title}}
+                        </td>
+                        <td title="'Plays'" filter="{ plays: 'number'}" sortable="'plays'">
+                            {{report.plays}}
+                        </td>
+                        <td title="'Avg Time Played'" filter="{ average_time_played: 'number'}" sortable="'average_time_played'">
+                            {{report.average_time_played}}
+                        </td>
+                        <td title="'25%'" filter="{ play_progress_quarter: 'number'}" sortable="'play_progress_quarter'">
+                            {{report.play_progress_quarter}}
+                        </td>
+                        <td title="'50%'" filter="{ play_progress_half: 'number'}" sortable="'play_progress_half'">
+                            {{report.play_progress_half}}
+                        </td>
+                        <td title="'75%'" filter="{ play_progress_three_quarters: 'number'}" sortable="'play_progress_three_quarters'">
+                            {{report.play_progress_three_quarters}}
+                        </td>
+                        <td title="'100%'" filter="{ play_progress_end: 'number'}" sortable="'play_progress_end'">
+                            {{report.play_progress_end}}
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>
