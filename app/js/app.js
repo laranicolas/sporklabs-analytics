@@ -24,24 +24,27 @@ myAppModule.controller('MainCtrl', function (NgTableParams, $scope) {
                 width: '50%'
             }
         }
-    }, {
-        reportType: 'ga',
-        query: {
-            metrics: 'ga:metric1',
-            dimensions: 'ga:dimension2',
-            'start-date': $scope.startDate,
-            'end-date': $scope.endDate
-        },
-        chart: {
-            container: 'chart-container-2',
-            type: 'PIE',
-            options: {
-                width: '100%',
-                is3D: true,
-                title: 'Browser Usage'
-            }
-        }
-    }];
+    }
+    // , 
+    // {
+    //     reportType: 'ga',
+    //     query: {
+    //         metrics: 'ga:metric1',
+    //         dimensions: 'ga:dimension2',
+    //         'start-date': $scope.startDate,
+    //         'end-date': $scope.endDate
+    //     },
+    //     chart: {
+    //         container: 'chart-container-2',
+    //         type: 'PIE',
+    //         options: {
+    //             width: '100%',
+    //             is3D: true,
+    //             title: 'Browser Usage'
+    //         }
+    //     }
+    // }
+    ];
 
     // $scope.extraChart = {
     //     reportType: 'ga',

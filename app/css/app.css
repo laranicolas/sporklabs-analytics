@@ -1,0 +1,15 @@
+#view-selector-container {
+    margin-top: 1%;
+    padding: 1%;
+    background-color: #f8f8f8;
+    border-color: #e7e7e7;
+    display: flex;
+}
+#active-users-container-1 {
+    padding: 1%;
+}
+table {
+    .ng-table-sort-header {
+        background-color: #ddd !important;
+    }
+}
