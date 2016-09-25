@@ -8,6 +8,54 @@ myAppModule.controller('MainCtrl', function (NgTableParams, $scope) {
     $scope.showReport = false;
     $scope.startDate = '30daysAgo';
     $scope.endDate = 'today';
+    $scope.interval = 'last30Days';
+    $scope.chart;
+
+    var chart;
+
+    $scope.chatReady = function(data){
+        chart = data.chart;
+    }
+
+    $scope.updateInterval = function(newInterval){
+        $scope.interval = newInterval;
+        switch (newInterval) {
+            case "today": 
+                $scope.startDate = 'today';
+                $scope.endDate = 'today';
+                break;
+            case "yesterday": 
+                $scope.startDate = 'yesterday';
+                $scope.endDate = 'yesterday';
+                break;
+            case "thisWeek":
+                $scope.startDate = moment().weekday(0).format('YYYY-MM-DD');
+                $scope.endDate = moment().format('YYYY-MM-DD');
+                break;
+            case "thisMonth": 
+                $scope.startDate = moment().date(1).format('YYYY-MM-DD');
+                $scope.endDate = moment().format('YYYY-MM-DD');
+                break;
+            case "last30Days": 
+                $scope.startDate = '30daysAgo';
+                $scope.endDate = 'today';
+                break;
+
+            default:
+            break;
+        }
+
+        if (chart) {
+            chart.set({
+                query: {
+                    metrics: 'ga:metric1',
+                    dimensions: 'ga:dimension2',
+                    'start-date': $scope.startDate,
+                    'end-date': $scope.endDate
+                }
+            }).execute();            
+        }
+    }
 
     $scope.charts = [{
         reportType: 'ga',

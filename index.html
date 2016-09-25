@@ -10,9 +10,10 @@
         <link rel="stylesheet" href="app/css/app.css">
 
         <script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
-        <script type="text/javascript" src="bower_components/ngAnalytics/src/ng-analytics.min.js"></script>
+        <script type="text/javascript" src="bower_components/ngAnalytics/src/ng-analytics.js"></script>
         <script type="text/javascript" src="bower_components/underscore/underscore-min.js"></script>
         <script type="text/javascript" src="bower_components/ng-table/dist/ng-table.js"></script>
+        <script type="text/javascript" src="bower_components/moment/min/moment.min.js"></script>
         <script type="text/javascript" src="app/js/app.js"></script>
     </head>
     <body ng-controller="MainCtrl">
@@ -30,8 +31,16 @@
                 <ng-analytics-active-users label="Current users:" increase-class="increaser" decrease-class="decreaser" active-users-container="active-users-container-1" view-selector-container="view-selector-container" auth-container="embed-api-auth-container"></ng-analytics-active-users>
             </div>
 
+            <div class="row interval_row" ng-if="showReport">
+                <button ng-class="{active:interval==='today'}" ng-click="updateInterval('today')">Today</button>
+                <button ng-class="{active:interval==='yesterday'}" ng-click="updateInterval('yesterday')">Yesterday</button>
+                <button ng-class="{active:interval==='thisWeek'}" ng-click="updateInterval('thisWeek')">This Week</button>
+                <button ng-class="{active:interval==='thisMonth'}" ng-click="updateInterval('thisMonth')">This Month</button>
+                <button ng-class="{active:interval==='last30Days'}" ng-click="updateInterval('last30Days')">Last 30 Days</button>
+            </div>
+
             <div class="row">
-                <ng-analytics-chart ng-repeat="chart in charts" chart="chart" view-selector-container="view-selector-container" auth-container="embed-api-auth-container"></ng-analytics-chart>
+                <ng-analytics-chart ng-repeat="chart in charts" chart="chart" chart-response-fn="chatReady(data)" view-selector-container="view-selector-container" auth-container="embed-api-auth-container"></ng-analytics-chart>
             </div>
 
             <div class="row">
